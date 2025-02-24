@@ -1,0 +1,74 @@
+/* General Page Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #43cea2, #185a9d);
+    color: white;
+    text-align: center;
+}
+
+/* Main Container */
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Header Styling */
+header {
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 1.2rem;
+}
+
+/* Content Section */
+.content {
+    background: white;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+}
+
+/* Flowchart Image */
+/* Flowchart Image - Increased Size */
+.flowchart {
+    width: 100%;  /* Make it full width */
+    height: auto;  /* Maintain aspect ratio */
+    border-radius: 10px;
+    margin-top: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Download Button */
+.btn {
+    display: inline-block;
+    padding: 15px 20px;
+    background: #ff7b00;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #ff5200;
+}
+
+/* Footer */
+footer {
+    margin-top: 20px;
+    padding: 10px;
+}
