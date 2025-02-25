@@ -236,7 +236,7 @@
     let symptoms = Array.from(document.querySelectorAll('input[name="symptom"]')).map(input => input.value.trim()).filter(symptom => symptom !== "");
 
     // Replace with your actual Binder Flask API URL
-    let apiURL = "https://your-binder-url.herokuapp.com/diagnose";
+    let apiURL = "https://hub.2i2c.mybinder.org/user/henryallison--a-tem_assignment2-qs82pqk8/lab/tree/app.py";
 
     fetch(apiURL, {
         method: "POST",
