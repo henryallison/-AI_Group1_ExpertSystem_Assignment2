@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make Diagnosis</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Link to favicon -->
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #43cea2, #185a9d);
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensures the body takes full height */
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: rgba(0, 77, 64, 0.9);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1000;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin: 0 10px; /* Adjusted for better spacing */
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 8px 12px;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+
+        nav ul li a:hover {
+            background: #ffb74d;
+            color: #004d40;
+            transform: scale(1.1);
+        }
+
+        /* Main Content */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            flex: 1; /* Allows container to grow and fill space */
+        }
+
+        /* General Section Styling */
+        section {
+            background: rgba(255, 255, 255, 0.9);
+            color: black;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            text-align: left; /* Align text to the left */
+            opacity: 0; /* Start hidden for animation */
+            animation: fadeIn 3.15s forwards; /* Fade-in animation */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section h2 {
+            font-size: 2rem; /* Increase heading size */
+            margin-bottom: 20px; /* Space below heading */
+        }
+
+        section label {
+            display: block;
+            margin-top: 10px; /* Space above labels */
+            font-weight: bold; /* Bold labels */
+        }
+
+        section input,
+        section select {
+            width: 100%; /* Full width */
+            padding: 10px;
+            margin-top: 5px; /* Space above input */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 10px 15px; /* Adjusted for better fit */
+            background: #ff7b00;
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: 0.3s ease-in-out;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            margin-top: 10px; /* Space above the button */
+        }
+
+        .btn:hover {
+            background: #ff5200;
+            transform: translateY(-3px);
+        }
+
+        /* Diagnosis Result */
+        section h3 {
+            margin-top: 20px; /* Space above results heading */
+            font-size: 1.5rem; /* Increase size */
+        }
+
+        #result {
+            margin-top: 10px; /* Space above result text */
+            font-size: 1.2rem; /* Increase size */
+            opacity: 0; /* Start hidden for animation */
+            transition: opacity 0.5s ease; /* Smooth transition for result */
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(0, 77, 64, 0.9);
+            color: white;
+            position: relative;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul {
+                flex-direction: column;
+                margin-top: 10px;
+            }
+
+            nav ul li {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">🌾 Crop Disease Diagnosis</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="diagnosis.html">Make Diagnosis</a></li>
+            <li><a href="diseases.html">Common Diseases</a></li>
+            <li><a href="diagrams.html">System Diagrams</a></li>
+            <li><a href="Group1_Report_Assignment2_Day1.pdf" download class="btn">📥 Download Report</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section>
+            <h2>Diagnose Your Crop</h2>
+            <form id="diagnosisForm">
+                <label for="crop">Select Crop:</label>
+                <select id="crop" name="crop">
+                    <option value="maize">Maize</option>
+                    <option value="coffee">Coffee</option>
+                </select>
+
+                <label for="symptoms">Enter Symptoms:</label>
+                <div id="symptomContainer">
+                    <input type="text" name="symptom" placeholder="e.g., grayish lesions, yellowing leaves">
+                </div>
+                <button type="button" id="addSymptom">Add Another Symptom</button>
+
+                <button type="submit">Get Diagnosis</button>
+            </form>
+
+            <h3>Diagnosis Result:</h3>
+            <p id="result"></p>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Crop Disease Diagnosis | Built for Agricultural Advancement</p>
+    </footer>
+
+    <script>
+        // Function to dynamically add symptom input fields
+        document.getElementById('addSymptom').addEventListener('click', function() {
+            const symptomContainer = document.getElementById('symptomContainer');
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = 'symptom';
+            input.placeholder = 'e.g., grayish lesions, yellowing leaves';
+            symptomContainer.appendChild(input);
+        });
+
+        // Form submission
+        document.getElementById("diagnosisForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            let crop = document.getElementById("crop").value;
+            let symptoms = Array.from(document.querySelectorAll('input[name="symptom"]')).map(input => input.value.trim()).filter(symptom => symptom !== "");
+
+            fetch("https://your-binder-link.herokuapp.com/diagnose", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ crop: crop, symptoms: symptoms })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultElement = document.getElementById("result");
+                resultElement.innerText = `Diagnosis: ${data.diagnosis}\nTreatment: ${data.treatment}`;
+                resultElement.style.opacity = 1; // Fade in the result
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    </script>
+</body>
+</html>
