@@ -229,27 +229,30 @@
         });
 
         // Form submission
-        document.getElementById("diagnosisForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            
-            let crop = document.getElementById("crop").value;
-            let symptoms = Array.from(document.querySelectorAll('input[name="symptom"]')).map(input => input.value.trim()).filter(symptom => symptom !== "");
+       document.getElementById("diagnosisForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    
+    let crop = document.getElementById("crop").value;
+    let symptoms = Array.from(document.querySelectorAll('input[name="symptom"]')).map(input => input.value.trim()).filter(symptom => symptom !== "");
 
-            fetch("https://your-binder-link.herokuapp.com/diagnose", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ crop: crop, symptoms: symptoms })
-            })
-            .then(response => response.json())
-            .then(data => {
-                const resultElement = document.getElementById("result");
-                resultElement.innerText = `Diagnosis: ${data.diagnosis}\nTreatment: ${data.treatment}`;
-                resultElement.style.opacity = 1; // Fade in the result
-            })
-            .catch(error => console.error("Error:", error));
-        });
+    // Replace with your actual Binder Flask API URL
+    let apiURL = "https://your-binder-url.herokuapp.com/diagnose";
+
+    fetch(apiURL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ crop: crop, symptoms: symptoms })
+    })
+    .then(response => response.json())
+    .then(data => {
+        const resultElement = document.getElementById("result");
+        resultElement.innerText = `Diagnosis: ${data.diagnosis}\nTreatment: ${data.treatment}`;
+        resultElement.style.opacity = 1; // Fade in the result
+    })
+    .catch(error => console.error("Error:", error));
+});
     </script>
 </body>
 </html>
