@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Make Diagnosis</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Link to favicon -->
     <style>
         /* General Styling */
         body {
@@ -16,13 +16,13 @@
             text-align: center;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
+            min-height: 100vh; /* Ensures the body takes full height */
         }
 
         /* Navigation Bar */
         nav {
             background: rgba(0, 77, 64, 0.9);
-            padding: 15px 20px;
+            padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -45,7 +45,7 @@
         }
 
         nav ul li {
-            margin: 0 15px;
+            margin: 0 10px; /* Adjusted for better spacing */
         }
 
         nav ul li a {
@@ -63,53 +63,25 @@
             transform: scale(1.1);
         }
 
-        /* Responsive Navigation */
-        @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            nav ul {
-                flex-direction: column;
-                display: none;
-                width: 100%;
-            }
-
-            nav ul.active {
-                display: flex;
-            }
-
-            nav ul li {
-                margin: 5px 0;
-            }
-
-            .menu-toggle {
-                display: block;
-                font-size: 1.5rem;
-                color: white;
-                cursor: pointer;
-                margin-top: 5px;
-            }
-        }
-
         /* Main Content */
         .container {
             width: 90%;
             max-width: 1200px;
             margin: 20px auto;
-            flex: 1;
+            flex: 1; /* Allows container to grow and fill space */
         }
 
+        /* General Section Styling */
         section {
             background: rgba(255, 255, 255, 0.9);
             color: black;
-            padding: 25px;
+            padding: 30px;
             border-radius: 10px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
             margin-top: 20px;
-            text-align: left;
-            animation: fadeIn 1.5s forwards;
+            text-align: left; /* Align text to the left */
+            opacity: 0; /* Start hidden for animation */
+            animation: fadeIn 3.15s forwards; /* Fade-in animation */
         }
 
         @keyframes fadeIn {
@@ -124,53 +96,56 @@
         }
 
         section h2 {
-            font-size: 2rem;
-            margin-bottom: 15px;
+            font-size: 2rem; /* Increase heading size */
+            margin-bottom: 20px; /* Space below heading */
         }
 
         section label {
             display: block;
-            margin-top: 10px;
-            font-weight: bold;
+            margin-top: 10px; /* Space above labels */
+            font-weight: bold; /* Bold labels */
         }
 
         section input,
         section select {
-            width: 100%;
-            padding: 12px;
-            margin-top: 5px;
+            width: 100%; /* Full width */
+            padding: 10px;
+            margin-top: 5px; /* Space above input */
             border: 1px solid #ccc;
             border-radius: 5px;
-            font-size: 1rem;
         }
 
         /* Buttons */
-        .btn, button {
+        .btn {
             display: inline-block;
-            width: 100%;
-            padding: 12px;
+            padding: 10px 15px; /* Adjusted for better fit */
             background: #ff7b00;
             color: white;
+            text-decoration: none;
             font-size: 1rem;
             font-weight: bold;
             border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 10px;
+            transition: 0.3s ease-in-out;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            margin-top: 10px; /* Space above the button */
         }
 
-        .btn:hover, button:hover {
+        .btn:hover {
             background: #ff5200;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
         }
 
         /* Diagnosis Result */
+        section h3 {
+            margin-top: 20px; /* Space above results heading */
+            font-size: 1.5rem; /* Increase size */
+        }
+
         #result {
-            margin-top: 15px;
-            font-size: 1.2rem;
-            opacity: 0;
-            transition: opacity 0.5s ease;
+            margin-top: 10px; /* Space above result text */
+            font-size: 1.2rem; /* Increase size */
+            opacity: 0; /* Start hidden for animation */
+            transition: opacity 0.5s ease; /* Smooth transition for result */
         }
 
         /* Footer */
@@ -179,24 +154,24 @@
             padding: 10px;
             background: rgba(0, 77, 64, 0.9);
             color: white;
+            position: relative;
             text-align: center;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            section {
-                padding: 20px;
+            nav {
+                flex-direction: column;
+                align-items: center;
             }
 
-            section h2 {
-                font-size: 1.5rem;
+            nav ul {
+                flex-direction: column;
+                margin-top: 10px;
             }
 
-            section input,
-            section select,
-            button {
-                font-size: 0.9rem;
-                padding: 10px;
+            nav ul li {
+                margin: 5px 0;
             }
         }
     </style>
@@ -204,11 +179,10 @@
 <body>
     <!-- Navigation Bar -->
     <nav>
-        <div class="logo">🌾 Crop Diagnosis</div>
-        <span class="menu-toggle" onclick="toggleMenu()">☰</span>
+        <div class="logo">🌾 Crop Disease Diagnosis</div>
         <ul>
             <li><a href="{{ url_for('static', filename='index.html') }}">Home Page</a></li>
-        </ul>
+            </ul>
     </nav>
 
     <div class="container">
@@ -223,7 +197,7 @@
 
                 <label for="symptoms">Enter Symptoms:</label>
                 <div id="symptomContainer">
-                    <input type="text" name="symptom" placeholder="e.g., grayish lesions, oval spots">
+                    <input type="text" name="symptom" placeholder="e.g., grayish lesions, small, oval spots,internal discoloration and rot">
                 </div>
                 <button type="button" id="addSymptom">Add Another Symptom</button>
 
@@ -236,36 +210,48 @@
     </div>
 
     <footer>
-        <p>&copy; 2025 Crop Disease Diagnosis | Built for Agriculture</p>
+        <p>&copy; 2025 Crop Disease Diagnosis | Built for Agricultural Advancement</p>
     </footer>
 
     <script>
-        function toggleMenu() {
-            document.querySelector('nav ul').classList.toggle('active');
-        }
-
+        // Function to dynamically add symptom input fields
         document.getElementById('addSymptom').addEventListener('click', function() {
             const symptomContainer = document.getElementById('symptomContainer');
             const input = document.createElement('input');
             input.type = 'text';
             input.name = 'symptom';
-            input.placeholder = 'e.g., yellowing and wilting';
+            input.placeholder = 'e.g., yellowing and wilting, internal discoloration and rot';
             symptomContainer.appendChild(input);
         });
-
+    
+        // Form submission
         document.getElementById("diagnosisForm").addEventListener("submit", function(event) {
             event.preventDefault();
             
             let crop = document.getElementById("crop").value;
             let symptoms = Array.from(document.querySelectorAll('input[name="symptom"]')).map(input => input.value.trim()).filter(symptom => symptom !== "");
-
-            fetch("/diagnose", {
+    
+            // Use a conditional to set the fetch URL based on the environment
+            const fetchUrl = window.location.hostname === "localhost" ? 
+                "http://127.0.0.1:4000/diagnose" : 
+                "/diagnose"; // Adjust the path as needed for production
+    
+            fetch(fetchUrl, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json"
+                },
                 body: JSON.stringify({ crop: crop, symptoms: symptoms })
             })
             .then(response => response.json())
             .then(data => {
                 const resultElement = document.getElementById("result");
                 resultElement.innerText = `Diagnosis: ${data.diagnosis}\nTreatment: ${data.treatment}`;
-                resultElement.style.opac
+                resultElement.style.opacity = 1; // Fade in the result
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    </script>
+    
+</body>
+</html>
