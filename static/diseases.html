@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Common Diseases</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #e0f7fa, #80deea);
+            color: #333;
+            text-align: center;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: #004d40; /* Opaque background */
+            padding: 10px 20px; /* Reduced padding */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav .logo {
+            font-size: 1.5rem; /* Reduced logo size */
+            font-weight: bold;
+            color: #fff;
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        nav ul li {
+            margin: 0 10px; /* Reduced margin */
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px; /* Reduced padding */
+            transition: background 0.3s, transform 0.3s;
+            border-radius: 5px;
+            font-size: 0.9rem; /* Reduced font size */
+        }
+
+        nav ul li a:hover {
+            background: #ffb74d;
+            transform: scale(1.05);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        section {
+            margin: 20px 0;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #004d40;
+        }
+
+        .disease-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Create a 3-column grid */
+            gap: 20px; /* Space between images */
+            margin: 20px 0;
+        }
+
+        .disease {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            transition: transform 0.3s;
+        }
+
+        .disease:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .disease img {
+            width: 200px; /* Increase width */
+            height: 150px; /* Increase height */
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .disease h3 {
+            font-size: 1.5rem;
+            color: #00796b;
+            margin: 0;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(0, 77, 64, 0.9);
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Crop Disease Diagnosis</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="http://127.0.0.1:5000">Make Diagnosis</a></li>
+            <li><a href="diseases.html">Common Diseases</a></li>
+            <li><a href="diagrams.html">System Diagrams</a></li>
+            <li><a href="Group1_Report_Assignment2_Day1.pdf" download class="btn">📥 Download Report</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section>
+            <h2>Common Crop Diseases</h2>
+
+            <div class="disease-container">
+                <div class="disease">
+                    <img src="northern_leaf_blight.jpg" alt="Northern Leaf Blight">
+                    <h3>Northern Leaf Blight (Maize)</h3>
+                </div>
+
+                <div class="disease">
+                    <img src="gray_leaf_spot.jpg" alt="Gray Leaf Spot">
+                    <h3>Gray Leaf Spot (Maize)</h3>
+                </div>
+
+                <div class="disease">
+                    <img src="stalk_rot.jpg" alt="Stalk Rot">
+                    <h3>Stalk Rot (Maize)</h3>
+                </div>
+
+                <div class="disease">
+                    <img src="coffee_leaf_rust.jpg" alt="Coffee Leaf Rust">
+                    <h3>Coffee Leaf Rust (Coffee)</h3>
+                </div>
+
+                <div class="disease">
+                    <img src="coffee_berry_disease.jpg" alt="Coffee Berry Disease">
+                    <h3>Coffee Berry Disease (Coffee)</h3>
+                </div>
+
+                <div class="disease">
+                    <img src="fusarium_wilt.jpg" alt="Fusarium Wilt">
+                    <h3>Fusarium Wilt (Coffee)</h3>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Crop Disease Diagnosis | All Rights Reserved</p>
+    </footer>
+</body>
+</html>
