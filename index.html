@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Disease Diagnosis - Home</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Link to favicon -->
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #43cea2, #185a9d);
+            color: white;
+            text-align: center;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: rgba(0, 77, 64, 0.9);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1000;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin: 0 10px; /* Adjusted for better spacing */
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 8px 12px;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+
+        nav ul li a:hover {
+            background: #ffb74d;
+            color: #004d40;
+            transform: scale(1.1);
+        }
+
+        /* Main Content */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        /* General Section Styling */
+        section {
+            background: rgba(255, 255, 255, 0.9);
+            color: black;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            animation: fadeIn 1s ease-in;
+            text-align: left; /* Align text to the left */
+        }
+
+        section h1 {
+            margin-bottom: 20px; /* Increased space below h1 */
+            font-size: 2.5rem;
+        }
+
+        section h2 {
+            margin-top: 20px;
+            font-size: 1.8rem; /* Slightly larger subheadings */
+            color: #004d40;
+        }
+
+        section p {
+            margin: 10px 0; /* Spacing for paragraphs */
+            line-height: 1.5; /* Improved readability */
+            font-size: 1.1rem; /* Slightly larger font size */
+        }
+
+        section ul {
+            list-style-type: disc;
+            padding-left: 20px; /* Indentation for list items */
+            margin: 10px 0; /* Space above and below the list */
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 10px 15px; /* Adjusted for better fit */
+            background: #ff7b00;
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: 0.3s ease-in-out;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            margin-top: 10px; /* Space above the button */
+        }
+
+        .btn:hover {
+            background: #ff5200;
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(0, 77, 64, 0.9);
+            color: white;
+            position: relative;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul {
+                flex-direction: column;
+                margin-top: 10px;
+            }
+
+            nav ul li {
+                margin: 5px 0;
+            }
+
+            section h1 {
+                font-size: 2rem; /* Smaller size for mobile */
+            }
+
+            section h2 {
+                font-size: 1.5rem; /* Smaller size for mobile */
+            }
+
+            .btn {
+                font-size: 1rem;
+                padding: 8px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">🌾 Crop Disease Diagnosis</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="http://127.0.0.1:5000">Make Diagnosis</a></li>
+            <li><a href="diseases.html">Common Diseases</a></li>
+            <li><a href="diagrams.html">System Diagrams</a></li>
+            <li><a href="Group1_Report_Assignment2_Day1.pdf" download class="btn">📥 Download Report</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Single Section for Content -->
+        <section id="overview">
+            <h1 style="text-align: center;">Welcome to Crop Disease Diagnosis</h1>
+            <p>Helping farmers in Rwanda diagnose and treat crop diseases effectively.     <a href="diagnosis.html" class="btn">🌱 Get Started</a>
+            </p>
+            
+            <h2>General Overview</h2>
+            <p>This system helps farmers identify maize and coffee diseases using a decision-tree-based diagnosis model. 
+               It offers treatment recommendations and enhances precision farming in Rwanda.</p>
+            
+            <h2>Mission</h2>
+            <ul>
+                <li>Our mission is to empower farmers with digital tools for diagnosing and managing crop diseases efficiently.</li>
+            </ul>
+            
+            <h2>Goals</h2>
+            <ul>
+                <li>Provide easy access to crop disease diagnosis.</li>
+                <li>Reduce crop losses and improve yield.</li>
+                <li>Enhance digital agricultural solutions.</li>
+            </ul>
+            
+            <h2>Objectives</h2>
+            <ul>
+                <li>Develop a user-friendly system for farmers.</li>
+                <li>Increase awareness of common crop diseases.</li>
+                <li>Encourage sustainable farming practices.</li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; Group 1 2025 Crop Disease Diagnosis | Built for Agricultural Advancement or Improvemennt</p>
+    </footer>
+</body>
+</html>
