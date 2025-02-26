@@ -4,18 +4,210 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Make Diagnosis</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Link to favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <style>
-        /* Your existing CSS styles */
-        /* ... */
+        /* General Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #43cea2, #185a9d);
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: rgba(0, 77, 64, 0.9);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1000;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 8px 12px;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+
+        nav ul li a:hover {
+            background: #ffb74d;
+            color: #004d40;
+            transform: scale(1.1);
+        }
+
+        /* Responsive Navigation */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                flex-direction: column;
+                display: none;
+                width: 100%;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 5px 0;
+            }
+
+            .menu-toggle {
+                display: block;
+                font-size: 1.5rem;
+                color: white;
+                cursor: pointer;
+                margin-top: 5px;
+            }
+        }
+
+        /* Main Content */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            flex: 1;
+        }
+
+        section {
+            background: rgba(255, 255, 255, 0.9);
+            color: black;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            text-align: left;
+            animation: fadeIn 1.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        section label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        section input,
+        section select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        /* Buttons */
+        .btn, button {
+            display: inline-block;
+            width: 100%;
+            padding: 12px;
+            background: #ff7b00;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn:hover, button:hover {
+            background: #ff5200;
+            transform: translateY(-2px);
+        }
+
+        /* Diagnosis Result */
+        #result {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(0, 77, 64, 0.9);
+            color: white;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            section {
+                padding: 20px;
+            }
+
+            section h2 {
+                font-size: 1.5rem;
+            }
+
+            section input,
+            section select,
+            button {
+                font-size: 0.9rem;
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav>
-        <div class="logo">🌾 Crop Disease Diagnosis</div>
+        <div class="logo">🌾 Crop Diagnosis</div>
+        <span class="menu-toggle" onclick="toggleMenu()">☰</span>
         <ul>
-            <li><a href="/">Home Page</a></li> <!-- Update link to root -->
+            <li><a href="{{ url_for('static', filename='index.html') }}">Home Page</a></li>
         </ul>
     </nav>
 
@@ -31,7 +223,7 @@
 
                 <label for="symptoms">Enter Symptoms:</label>
                 <div id="symptomContainer">
-                    <input type="text" name="symptom" placeholder="e.g., grayish lesions, small, oval spots, internal discoloration and rot">
+                    <input type="text" name="symptom" placeholder="e.g., grayish lesions, oval spots">
                 </div>
                 <button type="button" id="addSymptom">Add Another Symptom</button>
 
@@ -44,46 +236,36 @@
     </div>
 
     <footer>
-        <p>&copy; 2025 Crop Disease Diagnosis | Built for Agricultural Advancement</p>
+        <p>&copy; 2025 Crop Disease Diagnosis | Built for Agriculture</p>
     </footer>
 
-   <script>
-    // Function to dynamically add symptom input fields
-    document.getElementById('addSymptom').addEventListener('click', function() {
-        const symptomContainer = document.getElementById('symptomContainer');
-        const input = document.createElement('input');
-        input.type = 'text';
-        input.name = 'symptom';
-        input.placeholder = 'e.g., yellowing and wilting, internal discoloration and rot';
-        symptomContainer.appendChild(input);
-    });
+    <script>
+        function toggleMenu() {
+            document.querySelector('nav ul').classList.toggle('active');
+        }
 
-    // Form submission
-    document.getElementById("diagnosisForm").addEventListener("submit", function(event) {
-        event.preventDefault();
-        
-        let crop = document.getElementById("crop").value;
-        let symptoms = Array.from(document.querySelectorAll('input[name="symptom"]')).map(input => input.value.trim()).filter(symptom => symptom !== "");
+        document.getElementById('addSymptom').addEventListener('click', function() {
+            const symptomContainer = document.getElementById('symptomContainer');
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = 'symptom';
+            input.placeholder = 'e.g., yellowing and wilting';
+            symptomContainer.appendChild(input);
+        });
 
-        // Construct the fetch URL for Binder
-        const fetchUrl = "/diagnose"; // This will work on Binder
+        document.getElementById("diagnosisForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            let crop = document.getElementById("crop").value;
+            let symptoms = Array.from(document.querySelectorAll('input[name="symptom"]')).map(input => input.value.trim()).filter(symptom => symptom !== "");
 
-        fetch(fetchUrl, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ crop: crop, symptoms: symptoms })
-        })
-        .then(response => response.json())
-        .then(data => {
-            const resultElement = document.getElementById("result");
-            resultElement.innerText = `Diagnosis: ${data.diagnosis}\nTreatment: ${data.treatment}`;
-            resultElement.style.opacity = 1; // Fade in the result
-        })
-        .catch(error => console.error("Error:", error));
-    });
-</script>
-    
-</body>
-</html>
+            fetch("/diagnose", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ crop: crop, symptoms: symptoms })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultElement = document.getElementById("result");
+                resultElement.innerText = `Diagnosis: ${data.diagnosis}\nTreatment: ${data.treatment}`;
+                resultElement.style.opac
