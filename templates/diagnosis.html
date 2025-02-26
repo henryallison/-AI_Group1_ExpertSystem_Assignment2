@@ -16,7 +16,7 @@
             text-align: center;
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* Ensures the body takes full height */
+            min-height: 100vh;
         }
 
         /* Navigation Bar */
@@ -26,8 +26,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
-            z-index: 1000;
         }
 
         nav .logo {
@@ -45,7 +43,7 @@
         }
 
         nav ul li {
-            margin: 0 10px; /* Adjusted for better spacing */
+            margin: 0 10px;
         }
 
         nav ul li a {
@@ -68,10 +66,9 @@
             width: 90%;
             max-width: 1200px;
             margin: 20px auto;
-            flex: 1; /* Allows container to grow and fill space */
+            flex: 1;
         }
 
-        /* General Section Styling */
         section {
             background: rgba(255, 255, 255, 0.9);
             color: black;
@@ -79,38 +76,24 @@
             border-radius: 10px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
             margin-top: 20px;
-            text-align: left; /* Align text to the left */
-            opacity: 0; /* Start hidden for animation */
-            animation: fadeIn 3.15s forwards; /* Fade-in animation */
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            text-align: left;
         }
 
         section h2 {
-            font-size: 2rem; /* Increase heading size */
-            margin-bottom: 20px; /* Space below heading */
+            font-size: 2rem;
+            margin-bottom: 20px;
         }
 
         section label {
             display: block;
-            margin-top: 10px; /* Space above labels */
-            font-weight: bold; /* Bold labels */
+            margin-top: 10px;
+            font-weight: bold;
         }
 
-        section input,
         section select {
-            width: 100%; /* Full width */
+            width: 100%;
             padding: 10px;
-            margin-top: 5px; /* Space above input */
+            margin-top: 5px;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
@@ -118,16 +101,15 @@
         /* Buttons */
         .btn {
             display: inline-block;
-            padding: 10px 15px; /* Adjusted for better fit */
+            padding: 10px 15px;
             background: #ff7b00;
             color: white;
             text-decoration: none;
             font-size: 1rem;
             font-weight: bold;
             border-radius: 5px;
-            transition: 0.3s ease-in-out;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-            margin-top: 10px; /* Space above the button */
+            transition: 0.3s;
+            margin-top: 10px;
         }
 
         .btn:hover {
@@ -136,16 +118,11 @@
         }
 
         /* Diagnosis Result */
-        section h3 {
-            margin-top: 20px; /* Space above results heading */
-            font-size: 1.5rem; /* Increase size */
-        }
-
         #result {
-            margin-top: 10px; /* Space above result text */
-            font-size: 1.2rem; /* Increase size */
-            opacity: 0; /* Start hidden for animation */
-            transition: opacity 0.5s ease; /* Smooth transition for result */
+            margin-top: 10px;
+            font-size: 1.2rem;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
 
         /* Footer */
@@ -154,35 +131,16 @@
             padding: 10px;
             background: rgba(0, 77, 64, 0.9);
             color: white;
-            position: relative;
             text-align: center;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            nav ul {
-                flex-direction: column;
-                margin-top: 10px;
-            }
-
-            nav ul li {
-                margin: 5px 0;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
     <nav>
         <div class="logo">🌾 Crop Disease Diagnosis</div>
         <ul>
             <li><a href="{{ url_for('static', filename='index.html') }}">Home Page</a></li>
-            </ul>
+        </ul>
     </nav>
 
     <div class="container">
@@ -190,16 +148,16 @@
             <h2>Diagnose Your Crop</h2>
             <form id="diagnosisForm">
                 <label for="crop">Select Crop:</label>
-                <select id="crop" name="crop">
+                <select id="crop" name="crop" onchange="updateSymptoms()">
+                    <option value="">--Select Crop--</option>
                     <option value="maize">Maize</option>
                     <option value="coffee">Coffee</option>
                 </select>
 
-                <label for="symptoms">Enter Symptoms:</label>
-                <div id="symptomContainer">
-                    <input type="text" name="symptom" placeholder="e.g., grayish lesions, small, oval spots,internal discoloration and rot">
-                </div>
-                <button type="button" id="addSymptom">Add Another Symptom</button>
+                <label for="symptom">Select Symptom:</label>
+                <select id="symptom" name="symptom">
+                    <option value="">--Select Symptom--</option>
+                </select>
 
                 <button type="submit">Get Diagnosis</button>
             </form>
@@ -214,26 +172,43 @@
     </footer>
 
     <script>
-        // Function to dynamically add symptom input fields
-        document.getElementById('addSymptom').addEventListener('click', function() {
-            const symptomContainer = document.getElementById('symptomContainer');
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.name = 'symptom';
-            input.placeholder = 'e.g., yellowing and wilting, internal discoloration and rot';
-            symptomContainer.appendChild(input);
-        });
+        function updateSymptoms() {
+            var crop = document.getElementById("crop").value;
+            var symptomSelect = document.getElementById("symptom");
+            symptomSelect.innerHTML = "";
+    
+            var symptoms = [];
+            if (crop === "maize") {
+                symptoms = ["grayish lesions", "small, oval spots", "internal discoloration and rot"];
+            } else if (crop === "coffee") {
+                symptoms = ["orange rust spots", "dark, sunken lesions", "yellowing and wilting"];
+            }
+    
+            symptoms.forEach(function(symptom) {
+                var option = document.createElement("option");
+                option.value = symptom;
+                option.text = symptom;
+                symptomSelect.appendChild(option);
+            });
+        }
+    
+        // Ensure symptoms update when crop selection changes
+        document.getElementById("crop").addEventListener("change", updateSymptoms);
+    
+        // Run updateSymptoms on page load
+        window.onload = updateSymptoms;
     
         // Form submission
         document.getElementById("diagnosisForm").addEventListener("submit", function(event) {
             event.preventDefault();
             
             let crop = document.getElementById("crop").value;
-            let symptoms = Array.from(document.querySelectorAll('input[name="symptom"]')).map(input => input.value.trim()).filter(symptom => symptom !== "");
+            let selectedOptions = document.getElementById("symptom").selectedOptions;
+            let symptoms = Array.from(selectedOptions).map(option => option.value);
     
             // Use a conditional to set the fetch URL based on the environment
             const fetchUrl = window.location.hostname === "localhost" ? 
-                "http://127.0.0.1:4000/diagnose" : 
+                "http://127.0.0.1:5000/diagnose" : 
                 "/diagnose"; // Adjust the path as needed for production
     
             fetch(fetchUrl, {
