@@ -47,42 +47,43 @@
         <p>&copy; 2025 Crop Disease Diagnosis | Built for Agricultural Advancement</p>
     </footer>
 
-    <script>
-        // Function to dynamically add symptom input fields
-        document.getElementById('addSymptom').addEventListener('click', function() {
-            const symptomContainer = document.getElementById('symptomContainer');
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.name = 'symptom';
-            input.placeholder = 'e.g., yellowing and wilting, internal discoloration and rot';
-            symptomContainer.appendChild(input);
-        });
-    
-        // Form submission
-        document.getElementById("diagnosisForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            
-            let crop = document.getElementById("crop").value;
-            let symptoms = Array.from(document.querySelectorAll('input[name="symptom"]')).map(input => input.value.trim()).filter(symptom => symptom !== "");
+   <script>
+    // Function to dynamically add symptom input fields
+    document.getElementById('addSymptom').addEventListener('click', function() {
+        const symptomContainer = document.getElementById('symptomContainer');
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.name = 'symptom';
+        input.placeholder = 'e.g., yellowing and wilting, internal discoloration and rot';
+        symptomContainer.appendChild(input);
+    });
 
-            const fetchUrl = "/diagnose"; // Use the relative path for Binder
-    
-            fetch(fetchUrl, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ crop: crop, symptoms: symptoms })
-            })
-            .then(response => response.json())
-            .then(data => {
-                const resultElement = document.getElementById("result");
-                resultElement.innerText = `Diagnosis: ${data.diagnosis}\nTreatment: ${data.treatment}`;
-                resultElement.style.opacity = 1; // Fade in the result
-            })
-            .catch(error => console.error("Error:", error));
-        });
-    </script>
+    // Form submission
+    document.getElementById("diagnosisForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        let crop = document.getElementById("crop").value;
+        let symptoms = Array.from(document.querySelectorAll('input[name="symptom"]')).map(input => input.value.trim()).filter(symptom => symptom !== "");
+
+        // Construct the fetch URL for Binder
+        const fetchUrl = "/diagnose"; // This will work on Binder
+
+        fetch(fetchUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ crop: crop, symptoms: symptoms })
+        })
+        .then(response => response.json())
+        .then(data => {
+            const resultElement = document.getElementById("result");
+            resultElement.innerText = `Diagnosis: ${data.diagnosis}\nTreatment: ${data.treatment}`;
+            resultElement.style.opacity = 1; // Fade in the result
+        })
+        .catch(error => console.error("Error:", error));
+    });
+</script>
     
 </body>
 </html>
